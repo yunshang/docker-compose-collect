@@ -5,6 +5,8 @@ services:
     restart: always
     ports:
       - 8080:80
+    volumes:
+      - ./db-data:/var/lib/mysql:rw
   dbPostgres: 
     image: postgres:10
     restart: always
@@ -30,3 +32,7 @@ services:
     environment: 
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: changeme
+  dbRedis:
+    image: redis
+    ports:
+      - 6379:6379
