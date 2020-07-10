@@ -1,0 +1,16 @@
+version: "2"
+
+services:
+  zentao:
+    image: idoop/zentao:pro
+    ports:
+      - "9070:80"
+      - "3306:3306" 
+    environment:
+      USER: "admin"
+      PASSWD: "12345678"
+      BIND_ADDRESS: "false"
+      # SMTP_HOST: "localhost smtp.exmail.qq.com"
+    volumes:
+      - ./data/zbox/:/opt/zbox
+    restart: always

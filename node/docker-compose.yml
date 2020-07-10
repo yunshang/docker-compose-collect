@@ -1,0 +1,28 @@
+version: "3"
+services:
+  nginx_proxy:
+    image: nginx:stable
+    restart: always
+    working_dir: /app
+    volumes:
+       - ./index.html:/usr/share/nginx/html/index.html
+       - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 3000:80
+    links:
+      - web:server
+  web:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    user: node
+    restart: always
+    working_dir: /app
+    environment:
+      - PORT=3000
+    volumes:
+      - ./index.js:/app/index.js 
+      - ./configs:/app/configs 
+      - ./node_modules:/app/node_modules 
+      - ./package.json:/app/package.json 
+    command: ["node", "index.js"]
