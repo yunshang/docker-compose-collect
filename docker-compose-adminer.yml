@@ -2,37 +2,35 @@ version: '3.1'
 services: 
   adminer: 
     image: clue/adminer 
-    restart: always
     ports:
-      - 8080:80
+      - 8088:80
     volumes:
       - ./db-data:/var/lib/mysql:rw
-  dbPostgres: 
-    image: postgres:10
-    restart: always
-    ports: 
-      - 5432:5432
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: mydb
+  # dbPostgres: 
+  #   image: postgres:10
+  #   ports: 
+  #     - 5432:5432
+  #   environment:
+  #     POSTGRES_USER: root
+  #     POSTGRES_PASSWORD: root
+  #     POSTGRES_DB: mydb
   dbMysql: 
     image: mysql:5.6
-    restart: always
     ports:  
       - 3306:3306
     environment: 
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: mydb
-  dbMongo: 
-    image: mongo:3.6.2
-    restart: always
-    ports:
-      - 27017:27017
-    environment: 
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: changeme
-  dbRedis:
-    image: redis
-    ports:
-      - 6379:6379
+    volumes:
+      - ./db-data:/var/lib/mysql:rw
+  # dbMongo: 
+  #   image: mongo:3.6.2
+  #   ports:
+  #     - 27017:27017
+  #   environment: 
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: changeme
+  # dbRedis:
+  #   image: redis
+  #   ports:
+  #     - 6379:6379
